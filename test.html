@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vulnerable Page</title>
+</head>
+<body>
+    <h1>Search</h1>
+    <form method="GET">
+        <input type="text" name="query" />
+        <input type="submit" value="Search" />
+    </form>
+
+    <p>You searched for: 
+        <script>
+            // Vulnerable to XSS: directly injecting user input into the page
+            const params = new URLSearchParams(window.location.search);
+            document.write(params.get("query"));
+        </script>
+    </p>
+</body>
+</html>
